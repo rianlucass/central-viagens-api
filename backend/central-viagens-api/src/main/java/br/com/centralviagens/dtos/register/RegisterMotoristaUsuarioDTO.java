@@ -1,5 +1,6 @@
 package br.com.centralviagens.dtos.register;
 
+import br.com.centralviagens.dtos.request.DadosPessoaisRequestDTO;
 import br.com.centralviagens.dtos.request.EnderecoRequestDTO;
 import br.com.centralviagens.dtos.request.MotoristaRequestDTO;
 import br.com.centralviagens.dtos.request.UsuarioRequestDTO;
@@ -16,6 +17,8 @@ public class RegisterMotoristaUsuarioDTO {
     UsuarioRequestDTO usuario;
 
     MotoristaRequestDTO motorista;
+
+    DadosPessoaisRequestDTO dadosPessoais;
 
     EnderecoRequestDTO endereco;
 }

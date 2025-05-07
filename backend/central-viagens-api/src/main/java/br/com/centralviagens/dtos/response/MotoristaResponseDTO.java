@@ -12,6 +12,7 @@ public record MotoristaResponseDTO(
         String cnh_numero,
         LocalDate validade_cnh,
         String username,
+        String cpf,
         String cep,
         List<Viagem> viagensCriadas,
         List<Veiculo> veiculos

@@ -1,8 +1,10 @@
 package br.com.centralviagens.services;
 
+import br.com.centralviagens.dtos.request.DadosPessoaisRequestDTO;
 import br.com.centralviagens.dtos.request.EnderecoRequestDTO;
 import br.com.centralviagens.dtos.request.PassageiroRequestDTO;
 import br.com.centralviagens.dtos.request.UsuarioRequestDTO;
+import br.com.centralviagens.dtos.response.DadosPessoaisResponseDTO;
 import br.com.centralviagens.dtos.response.EnderecoResponseDTO;
 import br.com.centralviagens.dtos.response.PassageiroResponseDTO;
 import br.com.centralviagens.models.Passageiro;
@@ -25,11 +27,16 @@ public class PassageiroService {
     private UsuarioService usuarioService;
 
     @Autowired
+    private DadosPessoaisService dadosPessoaisService;
+
+    @Autowired
     private EnderecoService enderecoService;
 
     @Transactional
-    public PassageiroResponseDTO registerPassenger(PassageiroRequestDTO passageiroRequest, UsuarioRequestDTO usuarioRequest, EnderecoRequestDTO enderecoRequest) {
+    public PassageiroResponseDTO registerPassenger(PassageiroRequestDTO passageiroRequest, UsuarioRequestDTO usuarioRequest, DadosPessoaisRequestDTO dadosPessoaisRequest, EnderecoRequestDTO enderecoRequest) {
+
         Usuario usuario = usuarioService.registerUserEntity(usuarioRequest);
+        DadosPessoaisResponseDTO dadosPessoais = dadosPessoaisService.savePersonalData(dadosPessoaisRequest, usuario);
         EnderecoResponseDTO endereco = enderecoService.saveAddress(enderecoRequest, usuario);
 
         Passageiro passageiro = new Passageiro();
@@ -39,6 +46,8 @@ public class PassageiroService {
         PassageiroResponseDTO responseDTO = new PassageiroResponseDTO(
                 passageiro.getId(),
                 passageiro.getUsuario().getUsername(),
+                dadosPessoais.cpf(),
+                endereco.cep(),
                 passageiro.getViagensCompradas()
         );
         return responseDTO;
@@ -49,6 +58,8 @@ public class PassageiroService {
             PassageiroResponseDTO responseDTO = new PassageiroResponseDTO(
                     passageiro.getId(),
                     passageiro.getUsuario().getUsername(),
+                    passageiro.getUsuario().getEndereco().getCep(),
+                    passageiro.getUsuario().getDadosPessoais().getCpf(),
                     passageiro.getViagensCompradas()
             );
             return responseDTO;

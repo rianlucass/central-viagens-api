@@ -26,7 +26,7 @@ public class MotoristaController {
     public ResponseEntity<MotoristaResponseDTO> registerMotorista(@Valid @RequestBody RegisterMotoristaUsuarioDTO requestDTO) {
         requestDTO.getUsuario().setType(UserType.MOTORISTA);
         requestDTO.getUsuario().setStatus(UserStatus.ATIVO);
-        MotoristaResponseDTO responseDTO = motoristaService.registerDriver(requestDTO.getMotorista(), requestDTO.getUsuario(), requestDTO.getEndereco());
+        MotoristaResponseDTO responseDTO = motoristaService.registerDriver(requestDTO.getMotorista(), requestDTO.getUsuario(), requestDTO.getDadosPessoais(),  requestDTO.getEndereco());
         return ResponseEntity.ok(responseDTO);
     }
 

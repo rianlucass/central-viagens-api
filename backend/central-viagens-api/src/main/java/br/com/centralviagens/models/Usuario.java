@@ -31,8 +31,7 @@ public class Usuario {
     @Enumerated(EnumType.STRING)
     private UserStatus status;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "dados_pessoais_id")
+    @OneToOne(mappedBy = "usuario",cascade = CascadeType.ALL)
     private DadosPessoais dadosPessoais;
 
     @OneToOne(mappedBy = "usuario", cascade = CascadeType.ALL)

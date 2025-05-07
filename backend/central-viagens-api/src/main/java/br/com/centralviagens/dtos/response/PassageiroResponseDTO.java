@@ -7,5 +7,7 @@ import java.util.List;
 public record PassageiroResponseDTO(
         String id,
         String username,
+        String cep,
+        String cpf,
         List<Viagem> viagensCompradas
 ) { }

@@ -25,7 +25,6 @@ public class EnderecoService {
     public EnderecoResponseDTO saveAddress(EnderecoRequestDTO enderecoRequest, Usuario usuario) {
 
         Endereco endereco = new Endereco();
-        System.out.println("ID do Usuario:" + usuario.getId());
         endereco.setUsuario(usuario);
         endereco.setEstado(enderecoRequest.getEstado());
         endereco.setCidade(enderecoRequest.getCidade());

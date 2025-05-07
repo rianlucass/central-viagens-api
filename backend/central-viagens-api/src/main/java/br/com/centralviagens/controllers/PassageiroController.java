@@ -27,7 +27,7 @@ public class PassageiroController {
     public ResponseEntity<PassageiroResponseDTO> registerPassageiro(@Valid @RequestBody RegisterPassageiroUsuarioDTO requestDTO) {
         requestDTO.getUsuario().setType(UserType.PASSAGEIRO);
         requestDTO.getUsuario().setStatus(UserStatus.ATIVO);
-        PassageiroResponseDTO responseDTO = passageiroService.registerPassenger(requestDTO.getPassageiro(), requestDTO.getUsuario(), requestDTO.getEndereco());
+        PassageiroResponseDTO responseDTO = passageiroService.registerPassenger(requestDTO.getPassageiro(), requestDTO.getUsuario(), requestDTO.getDadosPessoais(), requestDTO.getEndereco());
         return ResponseEntity.ok(responseDTO);
     }
 

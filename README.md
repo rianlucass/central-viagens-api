@@ -1,22 +1,16 @@
 ﻿# Central-Viagens
 
-Visão Geral
-A aplicação permite que passageiros consultem rotas disponíveis, realizem reservas, visualizem o histórico de viagens e efetuem pagamentos. Além disso, contempla a gestão de usuários (passageiros e motoristas), controle de rotas, horários e empresas de transporte.
+ Visão Geral
+<p align="justify"> Este é um sistema web completo para <strong>venda de passagens rodoviárias</strong>, desenvolvido com backend em Spring Boot e API REST segura com JWT. A aplicação permite que passageiros pesquisem rotas disponíveis, realizem reservas, acompanhem o histórico de viagens e efetuem pagamentos. Também contempla a gestão completa de usuários, motoristas, rotas, horários e empresas de transporte. </p> <details> <summary><strong>Principais componentes da arquitetura</strong></summary>
+API RESTful estruturada por responsabilidades
 
-Funcionalidades do Backend
-Autenticação e autorização com Spring Security e JWT
+Segurança com autenticação baseada em tokens JWT
 
-Cadastro e login de usuários (diferentes perfis)
+Camadas desacopladas com DTOs, Services e Repositories
 
-Cadastro e gerenciamento de viagens, rotas e horários
+Integração com banco de dados relacional (PostgreSQL ou MySQL)
 
-Reserva e compra de passagens
-
-Listagem de passagens disponíveis por rota/data
-
-Consulta de histórico de viagens por passageiro
-
-Endpoints RESTful organizados por recursos
+</details>
  
 Prototipo inicial : https://www.figma.com/design/qRgNbwdfcDVKeADnqEyl9B/prototipo-site-de-viagens?node-id=0-1&m=dev&t=Z4Ju8CJo7PmG0jT7-1
  

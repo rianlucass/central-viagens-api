@@ -13,7 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/motorista")
+@RequestMapping("/cadastro")
 public class MotoristaController {
 
     @Autowired
@@ -22,7 +22,7 @@ public class MotoristaController {
     @Autowired
     private MotoristaService motoristaService;
 
-    @PostMapping
+    @PostMapping("/motorista")
     public ResponseEntity<MotoristaResponseDTO> registerMotorista(@Valid @RequestBody RegisterMotoristaUsuarioDTO requestDTO) {
         requestDTO.getUsuario().setType(UserType.MOTORISTA);
         requestDTO.getUsuario().setStatus(UserStatus.ATIVO);

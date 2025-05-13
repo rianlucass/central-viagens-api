@@ -14,11 +14,11 @@ import lombok.Setter;
 @AllArgsConstructor
 public class RegisterMotoristaUsuarioDTO {
 
-    UsuarioRequestDTO usuario;
+    private UsuarioRequestDTO usuario;
 
-    MotoristaRequestDTO motorista;
+    private MotoristaRequestDTO motorista;
 
-    DadosPessoaisRequestDTO dadosPessoais;
+    private DadosPessoaisRequestDTO dadosPessoais;
 
-    EnderecoRequestDTO endereco;
+    private EnderecoRequestDTO endereco;
 }

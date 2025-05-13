@@ -33,7 +33,7 @@ public class UsuarioRequestDTO {
     //@NotNull(message = "Este campo não pode ser nulo.")
     private UserType type;
 
-    @NotNull(message = "Este campo não pode ser nulo.")
+    //@NotNull(message = "Este campo não pode ser nulo.")
     private UserStatus status;
 
     private DadosPessoais dadosPessoais;

@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/passageiro")
+@RequestMapping("/cadastro")
 public class PassageiroController {
 
     @Autowired
@@ -23,7 +23,7 @@ public class PassageiroController {
     @Autowired
     private PassageiroService passageiroService;
 
-    @PostMapping
+    @PostMapping("/passageiro")
     public ResponseEntity<PassageiroResponseDTO> registerPassageiro(@Valid @RequestBody RegisterPassageiroUsuarioDTO requestDTO) {
         requestDTO.getUsuario().setType(UserType.PASSAGEIRO);
         requestDTO.getUsuario().setStatus(UserStatus.ATIVO);

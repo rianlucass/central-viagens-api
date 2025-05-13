@@ -6,6 +6,7 @@ import br.com.centralviagens.models.Usuario;
 import br.com.centralviagens.repositories.UsuarioRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,12 +18,15 @@ public class UsuarioService {
     @Autowired
     private UsuarioRepository usuarioRepository;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     @Transactional
     public UsuarioResponseDTO registerUser(UsuarioRequestDTO requestDTO) {
         Usuario usuario = new Usuario();
         usuario.setUsername(requestDTO.getUsername());
         usuario.setEmail(requestDTO.getEmail());
-        usuario.setPassword(requestDTO.getPassword());
+        usuario.setPassword(passwordEncoder.encode(requestDTO.getPassword()));
         usuario.setType(requestDTO.getType());
         usuario.setStatus(requestDTO.getStatus());
 
@@ -44,7 +48,7 @@ public class UsuarioService {
         Usuario usuario = new Usuario();
         usuario.setUsername(requestDTO.getUsername());
         usuario.setEmail(requestDTO.getEmail());
-        usuario.setPassword(requestDTO.getPassword());
+        usuario.setPassword(passwordEncoder.encode(requestDTO.getPassword()));
         usuario.setType(requestDTO.getType());
         usuario.setStatus(requestDTO.getStatus());
 

@@ -8,7 +8,7 @@ public record ViagemResponseDTO(
         String origem,
         String destino,
         LocalDateTime dataPartida,
-        LocalDateTime dataChegada,
-        BigDecimal preco
+        BigDecimal preco,
+        String detalhesVeiculo
 ) {
 }

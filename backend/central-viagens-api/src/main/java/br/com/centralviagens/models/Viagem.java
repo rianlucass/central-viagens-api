@@ -20,8 +20,10 @@ public class Viagem {
     private String origem;
     private String destino;
     private LocalDateTime dataPartida;
-    private LocalDateTime dataChegada;
     private BigDecimal preco;
+    private boolean bagagemGrande;
+    private boolean animaisEstimação;
+    private String observacoes;
 
     @ManyToOne
     @JoinColumn(name = "motorista_id")

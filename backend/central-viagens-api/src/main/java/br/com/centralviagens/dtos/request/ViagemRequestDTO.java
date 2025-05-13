@@ -1,5 +1,6 @@
 package br.com.centralviagens.dtos.request;
 
+import br.com.centralviagens.models.Veiculo;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -23,8 +24,17 @@ public class ViagemRequestDTO {
         private LocalDateTime dataPartida;
 
         @NotNull(message = "Este campo não pode ser nulo.")
-        private LocalDateTime dataChegada;
+        private BigDecimal preco;
 
         @NotNull(message = "Este campo não pode ser nulo.")
-        private BigDecimal preco;
+        private boolean bagagemGrande;
+
+        @NotNull(message = "Este campo não pode ser nulo.")
+        private boolean animaisEstimacao;
+
+        @NotNull(message = "Este campo não pode ser nulo.")
+        private String observacoes;
+
+        @NotNull(message = "Este campo não pode ser nulo.")
+        private Veiculo veiculo;
 }

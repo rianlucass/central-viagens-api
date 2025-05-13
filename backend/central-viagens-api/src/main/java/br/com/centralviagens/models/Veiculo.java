@@ -21,7 +21,6 @@ public class Veiculo {
     private String marca;
     private String placa;
     private int ano;
-    private String cor;
     private int capacidade;
 
     @ManyToOne

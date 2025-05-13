@@ -15,7 +15,5 @@ public class VeiculoRequestDTO {
     private String marca;
     private String placa;
     private int ano;
-    private String cor;
     private int capacidade;
-    private Motorista motorista;
 }

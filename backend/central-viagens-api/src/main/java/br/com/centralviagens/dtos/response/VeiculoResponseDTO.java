@@ -9,6 +9,5 @@ public record VeiculoResponseDTO(
         String marca,
         String placa,
         int ano,
-        String cor,
         int capacidade
 ) { }

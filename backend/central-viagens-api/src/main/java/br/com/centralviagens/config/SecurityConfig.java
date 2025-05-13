@@ -1,7 +1,6 @@
 package br.com.centralviagens.config;
 
 import br.com.centralviagens.filters.JwtAuthFilter;
-import br.com.centralviagens.services.CustomUserDetailsService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -27,10 +26,10 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .csrf().disable()
+                .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/").permitAll()
-                        .requestMatchers("/auth/**").permitAll()
+                        .requestMatchers("/login/**").permitAll()
                         .requestMatchers("/cadastro/**").permitAll()
                         .requestMatchers("/motorista/**").hasRole("MOTORISTA")
                         .requestMatchers("/passageiro/**").hasRole("PASSAGEIRO")

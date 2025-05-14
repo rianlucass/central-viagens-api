@@ -38,7 +38,8 @@ public class UsuarioService {
                 usuario.getEmail(),
                 usuario.getPassword(),
                 usuario.getType(),
-                usuario.getStatus()
+                usuario.getStatus(),
+                usuario.getDadosPessoais().getTelefone()
         );
         return responseDTO;
     }
@@ -63,7 +64,8 @@ public class UsuarioService {
                     usuario.getEmail(),
                     usuario.getPassword(),
                     usuario.getType(),
-                    usuario.getStatus()
+                    usuario.getStatus(),
+                    usuario.getDadosPessoais().getTelefone()
             );
             return responseDTO;
         }).collect(Collectors.toList());
@@ -76,7 +78,8 @@ public class UsuarioService {
                 usuario.getEmail(),
                 usuario.getPassword(),
                 usuario.getType(),
-                usuario.getStatus()
+                usuario.getStatus(),
+                usuario.getDadosPessoais().getTelefone()
         )).orElseThrow(() -> new RuntimeException("usuario nao encontrado"));//trocar depois
     }
 }

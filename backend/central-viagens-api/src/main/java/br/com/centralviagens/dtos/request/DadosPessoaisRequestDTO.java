@@ -25,6 +25,6 @@ public class DadosPessoaisRequestDTO {
         private String cpf;
 
         @NotBlank(message = "Este campo não pode ser nulo.")
-        @Size(max = 14, message = "Quantidade de caractere nao permitido")
+        @Size(max = 15, message = "Quantidade de caractere nao permitido")
         private String telefone;
 }

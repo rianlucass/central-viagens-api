@@ -13,12 +13,8 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 public class RegisterMotoristaUsuarioDTO {
-
     private UsuarioRequestDTO usuario;
-
     private MotoristaRequestDTO motorista;
-
     private DadosPessoaisRequestDTO dadosPessoais;
-
     private EnderecoRequestDTO endereco;
 }

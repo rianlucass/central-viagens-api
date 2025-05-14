@@ -9,5 +9,6 @@ public record UsuarioResponseDTO(
         String email,
         String password,
         UserType type,
-        UserStatus status
+        UserStatus status,
+        String telefone
 ) { }

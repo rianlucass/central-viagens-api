@@ -30,7 +30,8 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/").permitAll()
                         .requestMatchers("/login/**").permitAll()
-                        .requestMatchers("/cadastro/**").permitAll()
+                        .requestMatchers("/cadastro-motorista/**").permitAll()
+                        .requestMatchers("/cadastro-passageiro/**").permitAll()
                         .requestMatchers("/motorista/**").hasRole("MOTORISTA")
                         .requestMatchers("/passageiro/**").hasRole("PASSAGEIRO")
                         .anyRequest().authenticated()

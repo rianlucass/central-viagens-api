@@ -1,4 +1,4 @@
-package br.com.centralviagens.controllers;
+package br.com.centralviagens.controllers.motorista;
 
 
 import br.com.centralviagens.dtos.register.RegisterMotoristaUsuarioDTO;
@@ -13,7 +13,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/cadastro")
+@RequestMapping("/cadastro-motorista")
+@CrossOrigin(origins = "http://localhost:3000")
 public class MotoristaController {
 
     @Autowired

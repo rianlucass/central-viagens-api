@@ -1,4 +1,4 @@
-package br.com.centralviagens.controllers;
+package br.com.centralviagens.controllers.passageiro;
 
 import br.com.centralviagens.dtos.register.RegisterPassageiroUsuarioDTO;
 import br.com.centralviagens.dtos.response.PassageiroResponseDTO;
@@ -14,7 +14,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/cadastro")
+@RequestMapping("/cadastro-passageiro")
+@CrossOrigin(origins = "http://localhost:3000")
 public class PassageiroController {
 
     @Autowired

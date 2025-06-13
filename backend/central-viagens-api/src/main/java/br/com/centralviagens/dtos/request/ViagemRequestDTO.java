@@ -23,7 +23,7 @@ public class ViagemRequestDTO {
         private LocalDateTime dataPartida;
 
         @NotNull(message = "Este campo não pode ser nulo.")
-        private BigDecimal preco;
+        private BigDecimal valor;
 
         @NotNull(message = "Este campo não pode ser nulo.")
         private boolean bagagemGrande;

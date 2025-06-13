@@ -1,5 +1,7 @@
 package br.com.centralviagens.dtos.response;
 
+import br.com.centralviagens.models.enums.ViagemStatus;
+
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
@@ -8,7 +10,8 @@ public record ViagemResponseDTO(
         String origem,
         String destino,
         LocalDateTime dataPartida,
-        BigDecimal preco,
-        String detalhesVeiculo
+        BigDecimal valor,
+        String detalhesVeiculo,
+        ViagemStatus viagemStatus
 ) {
 }

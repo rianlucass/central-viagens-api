@@ -10,13 +10,14 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/motorista/viagem")
+@CrossOrigin(origins = "http://localhost:3000")
 public class ViagemController {
 
     @Autowired
     private ViagemService viagemService;
 
     @PostMapping("/cadastro")
-    public ResponseEntity<ViagemResponseDTO> registerTrip(@RequestBody ViagemRequestDTO requestDTO) {
+    public ResponseEntity<ViagemResponseDTO> registerTrip(@Valid @RequestBody ViagemRequestDTO requestDTO) {
         ViagemResponseDTO responseDTO = viagemService.registerTrip(requestDTO);
         return ResponseEntity.ok(responseDTO);
     }

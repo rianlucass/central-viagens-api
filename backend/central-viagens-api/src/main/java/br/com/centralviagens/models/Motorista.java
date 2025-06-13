@@ -29,4 +29,7 @@ public class Motorista {
 
     @OneToMany(mappedBy = "motorista")
     private List<Veiculo> veiculos;
+
+    @OneToMany(mappedBy = "motorista", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Transacao> transacoes;
 }

@@ -1,5 +1,6 @@
 package br.com.centralviagens.models;
 
+import br.com.centralviagens.models.enums.ViagemStatus;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -20,10 +21,11 @@ public class Viagem {
     private String origem;
     private String destino;
     private LocalDateTime dataPartida;
-    private BigDecimal preco;
+    private BigDecimal valor;
     private boolean bagagemGrande;
     private boolean animaisEstimação;
     private String observacoes;
+    private ViagemStatus viagemStatus;
 
     @ManyToOne
     @JoinColumn(name = "motorista_id")

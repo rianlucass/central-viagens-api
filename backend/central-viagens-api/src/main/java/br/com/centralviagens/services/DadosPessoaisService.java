@@ -26,7 +26,7 @@ public class DadosPessoaisService {
         dadosPessoais.setNome(dadosPessoaisRequest.getNome());
         dadosPessoais.setDataNascimento(dadosPessoaisRequest.getDataNascimento());
         dadosPessoais.setCpf(dadosPessoaisRequest.getCpf());
-        dadosPessoais.setTelefone(dadosPessoais.getTelefone());
+        dadosPessoais.setTelefone(dadosPessoaisRequest.getTelefone());
 
         dadosPessoais = dadosPessoaisRepository.save(dadosPessoais);
 

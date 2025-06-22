@@ -16,7 +16,9 @@ public class Motorista {
     @Id
     private String id;
     private String cnh_categoria;
-    private String cnh_numero;
+
+    @Column(unique = true)
+    private String cnhNumero;
     private LocalDate validade_cnh;
 
     @OneToOne

@@ -4,4 +4,7 @@ import br.com.centralviagens.models.Motorista;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface MotoristaRepository extends JpaRepository<Motorista, String> {
+
+    boolean existsByCnhNumero(String cnhNumero);
+
 }

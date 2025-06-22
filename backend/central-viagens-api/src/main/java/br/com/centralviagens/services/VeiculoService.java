@@ -2,6 +2,7 @@ package br.com.centralviagens.services;
 
 import br.com.centralviagens.dtos.request.VeiculoRequestDTO;
 import br.com.centralviagens.dtos.response.VeiculoResponseDTO;
+import br.com.centralviagens.exceptions.DadoDuplicadoException;
 import br.com.centralviagens.models.Motorista;
 import br.com.centralviagens.models.Usuario;
 import br.com.centralviagens.models.Veiculo;
@@ -31,6 +32,10 @@ public class VeiculoService {
     @Transactional
     public VeiculoResponseDTO registerCar(VeiculoRequestDTO requestDTO) {
 
+        if(veiculoRepository.existsByPlaca(requestDTO.getPlaca())) {
+            throw new DadoDuplicadoException("Placa invalida");
+        }
+
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
         Usuario usuario = usuarioRepository.findByUsername(username)
                 .orElseThrow(() -> new RuntimeException("Usuario não encontrado!"));
@@ -45,6 +50,7 @@ public class VeiculoService {
         veiculo.setAno(requestDTO.getAno());
         veiculo.setCapacidade(requestDTO.getCapacidade());
         veiculo.setMotorista(motorista);
+
         veiculo = veiculoRepository.save(veiculo);
 
         VeiculoResponseDTO responseDTO = new VeiculoResponseDTO(

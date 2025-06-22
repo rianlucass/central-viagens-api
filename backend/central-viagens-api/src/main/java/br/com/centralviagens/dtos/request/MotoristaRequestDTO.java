@@ -19,7 +19,7 @@ public class MotoristaRequestDTO{
         private String cnh_categoria;
 
         @NotBlank(message = "Este campo não pode ser nulo.")
-        private String cnh_numero;
+        private String cnhNumero;
 
         @NotNull(message = "Este campo não pode ser nulo.")
         private LocalDate validade_cnh;

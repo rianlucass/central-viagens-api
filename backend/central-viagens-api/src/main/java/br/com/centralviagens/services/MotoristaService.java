@@ -7,9 +7,11 @@ import br.com.centralviagens.dtos.request.UsuarioRequestDTO;
 import br.com.centralviagens.dtos.response.DadosPessoaisResponseDTO;
 import br.com.centralviagens.dtos.response.EnderecoResponseDTO;
 import br.com.centralviagens.dtos.response.MotoristaResponseDTO;
+import br.com.centralviagens.exceptions.DadoDuplicadoException;
 import br.com.centralviagens.models.DadosPessoais;
 import br.com.centralviagens.models.Motorista;
 import br.com.centralviagens.models.Usuario;
+import br.com.centralviagens.repositories.DadosPessoaisRepository;
 import br.com.centralviagens.repositories.MotoristaRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,8 +32,21 @@ public class MotoristaService {
     @Autowired
     private DadosPessoaisService dadosPessoaisService;
 
+    @Autowired
+    private DadosPessoaisRepository dadosPessoaisRepository;
+
     @Transactional
     public MotoristaResponseDTO registerDriver(MotoristaRequestDTO motoristaRequest, UsuarioRequestDTO usuarioRequest, DadosPessoaisRequestDTO dadosPessoaisRequest, EnderecoRequestDTO enderecoRequest) {
+
+        if (motoristaRepository.existsByCnhNumero(motoristaRequest.getCnhNumero())) {
+            throw new DadoDuplicadoException("CNH já cadastrada.");
+        }
+        if (dadosPessoaisRepository.existsByCpf(dadosPessoaisRequest.getCpf())) {
+            throw new DadoDuplicadoException("CPF já cadastrado.");
+        }
+        if (dadosPessoaisRepository.existsByTelefone(dadosPessoaisRequest.getTelefone())) {
+            throw new DadoDuplicadoException("Telefone já cadastrado.");
+        }
 
         Usuario usuario = usuarioService.registerUserEntity(usuarioRequest);
         DadosPessoaisResponseDTO dadosPessoais = dadosPessoaisService.savePersonalData(dadosPessoaisRequest, usuario);
@@ -40,14 +55,15 @@ public class MotoristaService {
         Motorista motorista = new Motorista();
         motorista.setUsuario(usuario);
         motorista.setCnh_categoria(motoristaRequest.getCnh_categoria());
-        motorista.setCnh_numero(motoristaRequest.getCnh_numero());
+        motorista.setCnhNumero(motoristaRequest.getCnhNumero());
         motorista.setValidade_cnh(motoristaRequest.getValidade_cnh());
+
         motorista = motoristaRepository.save(motorista);
 
         MotoristaResponseDTO responseDTO = new MotoristaResponseDTO(
                 motorista.getId(),
                 motorista.getCnh_categoria(),
-                motorista.getCnh_numero(),
+                motorista.getCnhNumero(),
                 motorista.getValidade_cnh(),
                 motorista.getUsuario().getUsername(),
                 dadosPessoais.cpf(),

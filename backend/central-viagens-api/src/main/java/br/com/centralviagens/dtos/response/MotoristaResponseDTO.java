@@ -9,7 +9,7 @@ import java.util.List;
 public record MotoristaResponseDTO(
         String id,
         String cnh_categoria,
-        String cnh_numero,
+        String cnhNumero,
         LocalDate validade_cnh,
         String username,
         String cpf,

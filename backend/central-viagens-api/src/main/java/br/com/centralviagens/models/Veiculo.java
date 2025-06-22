@@ -18,8 +18,12 @@ public class Veiculo {
     @Enumerated(EnumType.STRING)
     private TransportType tipo;
 
+    @Column(unique = true)
     private String marca;
+
+    @Column(unique = true)
     private String placa;
+
     private int ano;
     private int capacidade;
 

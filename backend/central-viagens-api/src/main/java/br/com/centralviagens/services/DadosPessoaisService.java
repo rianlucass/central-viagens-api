@@ -2,6 +2,7 @@ package br.com.centralviagens.services;
 
 import br.com.centralviagens.dtos.request.DadosPessoaisRequestDTO;
 import br.com.centralviagens.dtos.response.DadosPessoaisResponseDTO;
+import br.com.centralviagens.exceptions.DadoDuplicadoException;
 import br.com.centralviagens.models.DadosPessoais;
 import br.com.centralviagens.models.Usuario;
 import br.com.centralviagens.repositories.DadosPessoaisRepository;

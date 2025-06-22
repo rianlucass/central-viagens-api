@@ -2,6 +2,7 @@ package br.com.centralviagens.services;
 
 import br.com.centralviagens.dtos.request.UsuarioRequestDTO;
 import br.com.centralviagens.dtos.response.UsuarioResponseDTO;
+import br.com.centralviagens.exceptions.DadoDuplicadoException;
 import br.com.centralviagens.models.Usuario;
 import br.com.centralviagens.repositories.UsuarioRepository;
 import jakarta.transaction.Transactional;
@@ -23,6 +24,14 @@ public class UsuarioService {
 
     @Transactional
     public UsuarioResponseDTO registerUser(UsuarioRequestDTO requestDTO) {
+
+        if (usuarioRepository.existsByEmail(requestDTO.getEmail())) {
+            throw new DadoDuplicadoException("Email já cadastrado.");
+        }
+        if (usuarioRepository.existsByUsername(requestDTO.getUsername())) {
+            throw new DadoDuplicadoException("Nome de usuário já cadastrado.");
+        }
+
         Usuario usuario = new Usuario();
         usuario.setUsername(requestDTO.getUsername());
         usuario.setEmail(requestDTO.getEmail());

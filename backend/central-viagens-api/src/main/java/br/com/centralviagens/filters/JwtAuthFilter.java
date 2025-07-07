@@ -1,5 +1,8 @@
 package br.com.centralviagens.filters;
 
+import br.com.centralviagens.models.Usuario;
+import br.com.centralviagens.repositories.BlackListedTokenRepository;
+import br.com.centralviagens.security.CustomUserDetails;
 import br.com.centralviagens.services.CustomUserDetailsService;
 import br.com.centralviagens.services.JwtService;
 import jakarta.servlet.FilterChain;
@@ -7,6 +10,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.NonNull;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -23,6 +27,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
 
     private final JwtService jwtService;
     private final CustomUserDetailsService userDetailsService;
+    private final BlackListedTokenRepository blacklistedTokenRepository;
 
     @Override
     protected void doFilterInternal(
@@ -40,14 +45,23 @@ public class JwtAuthFilter extends OncePerRequestFilter {
         }
 
         jwt = authHeader.substring(7);
+
+        if (blacklistedTokenRepository.existsByToken(jwt)) {
+            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+            return;
+        }
+
         username = jwtService.extractUsername(jwt);
 
         if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
             UserDetails userDetails = this.userDetailsService.loadUserByUsername(username);
 
             if (jwtService.isTokenValid(jwt, userDetails)) {
+
+                Usuario usuario = ((CustomUserDetails) userDetails).getUsuario();
+
                 UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
-                        userDetails,
+                        usuario,
                         null,
                         userDetails.getAuthorities()
                 );

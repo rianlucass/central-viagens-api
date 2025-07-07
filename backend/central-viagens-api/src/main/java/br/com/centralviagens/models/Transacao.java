@@ -16,7 +16,7 @@ public class Transacao {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
-    private BigDecimal saldo;
+    private BigDecimal valor;
     private LocalDateTime data;
 
     @ManyToOne

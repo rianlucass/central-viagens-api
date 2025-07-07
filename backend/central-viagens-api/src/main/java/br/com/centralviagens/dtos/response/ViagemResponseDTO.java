@@ -7,11 +7,14 @@ import java.time.LocalDateTime;
 
 public record ViagemResponseDTO(
         String id,
-        String origem,
-        String destino,
+        String estadoOrigem,
+        String cidadeOrigem,
+        String estadoDestino,
+        String cidadeDestino,
         LocalDateTime dataPartida,
         BigDecimal valor,
         String detalhesVeiculo,
+        int capacidadeDisponivel,
         ViagemStatus viagemStatus
 ) {
 }

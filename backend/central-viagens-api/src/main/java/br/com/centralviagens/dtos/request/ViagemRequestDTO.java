@@ -14,10 +14,16 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class ViagemRequestDTO {
         @NotBlank(message = "Este campo não pode ser nulo.")
-        private String origem;
+        private String estadoOrigem;
 
         @NotBlank(message = "Este campo não pode ser nulo.")
-        private String destino;
+        private String cidadeOrigem;
+
+        @NotBlank(message = "Este campo não pode ser nulo.")
+        private String estadoDestino;
+
+        @NotBlank(message = "Este campo não pode ser nulo.")
+        private String cidadeDestino;
 
         @NotNull(message = "Este campo não pode ser nulo.")
         private LocalDateTime dataPartida;
@@ -33,6 +39,9 @@ public class ViagemRequestDTO {
 
         @NotNull(message = "Este campo não pode ser nulo.")
         private String observacoes;
+
+        @NotNull(message = "Este campo não pode ser nulo.")
+        private int capacidadeDisponivel;
 
         @NotNull(message = "Este campo não pode ser nulo.")
         private String veiculoId;

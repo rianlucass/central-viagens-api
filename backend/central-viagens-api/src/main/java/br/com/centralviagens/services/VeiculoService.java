@@ -36,8 +36,8 @@ public class VeiculoService {
             throw new DadoDuplicadoException("Placa invalida");
         }
 
-        String username = SecurityContextHolder.getContext().getAuthentication().getName();
-        Usuario usuario = usuarioRepository.findByUsername(username)
+        Usuario user = (Usuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Usuario usuario = usuarioRepository.findByUsername(user.getUsername())
                 .orElseThrow(() -> new RuntimeException("Usuario não encontrado!"));
         Motorista motorista = motoristaRepository.findById(usuario.getId())
                 .orElseThrow(() -> new RuntimeException("Motorista não associado"));
@@ -65,6 +65,22 @@ public class VeiculoService {
         );
 
         return responseDTO;
+    }
+
+    public List<VeiculoResponseDTO> getAllCarsByUsers(Usuario usuario) {
+        return veiculoRepository.findByMotoristaUsuarioId(usuario.getMotorista().getId()).stream().map(veiculo -> {
+            VeiculoResponseDTO responseDTO = new VeiculoResponseDTO(
+                    veiculo.getId(),
+                    veiculo.getModelo(),
+                    veiculo.getTipo(),
+                    veiculo.getMarca(),
+                    veiculo.getPlaca(),
+                    veiculo.getAno(),
+                    veiculo.getCapacidade(),
+                    veiculo.getMotorista().getUsuario().getUsername()
+            );
+            return responseDTO;
+        }).collect(Collectors.toList());
     }
 
     public List<VeiculoResponseDTO> getAllCars() {

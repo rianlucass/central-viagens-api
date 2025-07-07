@@ -39,16 +39,19 @@ public class ViagemService {
         Veiculo veiculo = veiculoRepository.findById(requestDTO.getVeiculoId())
                 .orElseThrow(() -> new RuntimeException("Veiculo não encontrado!"));
 
-        String username = SecurityContextHolder.getContext().getAuthentication().getName();
-        Usuario usuario = usuarioRepository.findByUsername(username)
+        Usuario user = (Usuario) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        Usuario usuario = usuarioRepository.findByUsername(user.getUsername())
                 .orElseThrow(() -> new RuntimeException("Usuario não encontrado!"));
 
         Motorista motorista = motoristaRepository.findById(usuario.getId())
                 .orElseThrow(() -> new RuntimeException("Motorista não associado"));
 
         Viagem viagem = new Viagem();
-        viagem.setOrigem(requestDTO.getOrigem());
-        viagem.setDestino(requestDTO.getDestino());
+        viagem.setEstadoOrigem(requestDTO.getEstadoOrigem());
+        viagem.setCidadeOrigem(requestDTO.getCidadeOrigem());
+        viagem.setEstadoDestino(requestDTO.getEstadoDestino());
+        viagem.setCidadeDestino(requestDTO.getCidadeDestino());
         viagem.setDataPartida(requestDTO.getDataPartida());
         viagem.setValor(requestDTO.getValor());
         viagem.setBagagemGrande(requestDTO.isBagagemGrande());
@@ -56,17 +59,21 @@ public class ViagemService {
         viagem.setObservacoes(requestDTO.getObservacoes());
         viagem.setVeiculo(veiculo);
         viagem.setMotorista(motorista);
+        viagem.setCapacidadeDisponivel(requestDTO.getCapacidadeDisponivel());
         viagem.setViagemStatus(ViagemStatus.DISPONIVEL);
 
         viagem = viagemRepository.save(viagem);
 
         ViagemResponseDTO responseDTO = new ViagemResponseDTO(
                 viagem.getId(),
-                viagem.getOrigem(),
-                viagem.getDestino(),
+                viagem.getEstadoOrigem(),
+                viagem.getCidadeOrigem(),
+                viagem.getEstadoDestino(),
+                viagem.getCidadeDestino(),
                 viagem.getDataPartida(),
                 viagem.getValor(),
                 viagem.getVeiculo().getMarca() + " - " + viagem.getVeiculo().getModelo(),
+                viagem.getCapacidadeDisponivel(),
                 viagem.getViagemStatus()
         );
         return responseDTO;
@@ -76,15 +83,17 @@ public class ViagemService {
         return viagemRepository.findAll().stream().map(viagem -> {
             ViagemResponseDTO responseDTO = new ViagemResponseDTO(
                     viagem.getId(),
-                    viagem.getOrigem(),
-                    viagem.getDestino(),
+                    viagem.getEstadoOrigem(),
+                    viagem.getCidadeOrigem(),
+                    viagem.getEstadoDestino(),
+                    viagem.getCidadeDestino(),
                     viagem.getDataPartida(),
                     viagem.getValor(),
                     viagem.getVeiculo().getMarca() +" - "+ viagem.getVeiculo().getModelo(),
+                    viagem.getCapacidadeDisponivel(),
                     viagem.getViagemStatus()
             );
             return responseDTO;
         }).collect(Collectors.toList());
     }
-
 }

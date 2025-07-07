@@ -18,13 +18,16 @@ public class Viagem {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
-    private String origem;
-    private String destino;
+    private String estadoOrigem;
+    private String cidadeOrigem;
+    private String EstadoDestino;
+    private String cidadeDestino;
     private LocalDateTime dataPartida;
     private BigDecimal valor;
     private boolean bagagemGrande;
     private boolean animaisEstimação;
     private String observacoes;
+    private int capacidadeDisponivel;
     private ViagemStatus viagemStatus;
 
     @ManyToOne

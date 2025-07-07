@@ -5,12 +5,9 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
-@Getter
-@Setter
-@AllArgsConstructor
-public class LoginResponseDTO {
-    private String token;
-    private UserType userType;
-    private String userId;
-
-}
+public record LoginResponseDTO(
+        String token,
+        UserType userType,
+        String userId,
+        String username
+) { }

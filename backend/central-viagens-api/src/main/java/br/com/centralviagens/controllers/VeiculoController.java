@@ -14,6 +14,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/motorista")
+@CrossOrigin(origins = "http://localhost:3000")
 public class VeiculoController {
 
     @Autowired
@@ -26,7 +27,7 @@ public class VeiculoController {
     }
 
     @GetMapping("/veiculos")
-    public ResponseEntity<List<VeiculoResponseDTO>> listarVeiculosDoUsuarioAutenticado(@AuthenticationPrincipal Usuario usuarioAutenticado) {
+    public ResponseEntity<List<VeiculoResponseDTO>> listCarsByUser(@AuthenticationPrincipal Usuario usuarioAutenticado) {
         List<VeiculoResponseDTO> veiculos = veiculoService.getAllCarsByUsers(usuarioAutenticado);
         return ResponseEntity.ok(veiculos);
     }

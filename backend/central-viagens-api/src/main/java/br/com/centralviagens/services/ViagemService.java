@@ -96,4 +96,22 @@ public class ViagemService {
             return responseDTO;
         }).collect(Collectors.toList());
     }
+
+    public List<ViagemResponseDTO> getAllTripByUser(Usuario usuario ) {
+        return viagemRepository.findByMotoristaUsuarioId(usuario.getMotorista().getId()).stream().map(viagem -> {
+            ViagemResponseDTO responseDTO = new ViagemResponseDTO(
+            viagem.getId(),
+            viagem.getEstadoOrigem(),
+            viagem.getCidadeOrigem(),
+            viagem.getEstadoDestino(),
+            viagem.getCidadeDestino(),
+            viagem.getDataPartida(),
+            viagem.getValor(),
+            viagem.getVeiculo().getModelo() + " - " + viagem.getVeiculo().getPlaca(),
+            viagem.getCapacidadeDisponivel(),
+            viagem.getViagemStatus()
+            );
+            return responseDTO;
+        }).collect(Collectors.toList());
+    }
 }

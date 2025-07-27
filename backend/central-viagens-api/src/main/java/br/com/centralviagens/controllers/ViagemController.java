@@ -1,6 +1,8 @@
 package br.com.centralviagens.controllers;
 
 import br.com.centralviagens.dtos.request.ViagemRequestDTO;
+import br.com.centralviagens.dtos.request.ViagemUpdateRequestDTO;
+import br.com.centralviagens.dtos.response.ViagemDetalhesResponseDTO;
 import br.com.centralviagens.dtos.response.ViagemResponseDTO;
 import br.com.centralviagens.models.Usuario;
 import br.com.centralviagens.services.ViagemService;
@@ -31,5 +33,29 @@ public class ViagemController {
         List<ViagemResponseDTO> viagens = viagemService.getAllTripByUser(usuarioAutenticado);
         return ResponseEntity.ok(viagens);
     }
+
+    @GetMapping("/{id}/detalhes")
+    public ResponseEntity<ViagemDetalhesResponseDTO> detailsTripByUser (@PathVariable String id) {
+        ViagemDetalhesResponseDTO viagemDetalhesResponseDTO = viagemService.detailsTripByUser(id);
+        return ResponseEntity.ok(viagemDetalhesResponseDTO);
+    }
+
+    @PutMapping("/{id}/iniciar")
+    public ResponseEntity<ViagemResponseDTO> iniciarViagem(@PathVariable String id, @AuthenticationPrincipal Usuario usuarioAutenticado) {
+        ViagemResponseDTO responseDTO = viagemService.iniciarViagem(id, usuarioAutenticado);
+        return ResponseEntity.ok(responseDTO);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<ViagemResponseDTO> updateTrip(
+            @PathVariable String id,
+            @Valid @RequestBody ViagemUpdateRequestDTO updateDTO,
+            @AuthenticationPrincipal Usuario usuarioAutenticado
+    ) {
+        ViagemResponseDTO responseDTO = viagemService.updateTrip(id, updateDTO, usuarioAutenticado);
+        return ResponseEntity.ok(responseDTO);
+    }
+
+
 
 }

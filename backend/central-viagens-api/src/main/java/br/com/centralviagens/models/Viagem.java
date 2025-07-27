@@ -20,12 +20,12 @@ public class Viagem {
     private String id;
     private String estadoOrigem;
     private String cidadeOrigem;
-    private String EstadoDestino;
+    private String estadoDestino;
     private String cidadeDestino;
     private LocalDateTime dataPartida;
     private BigDecimal valor;
     private boolean bagagemGrande;
-    private boolean animaisEstimação;
+    private boolean animaisEstimacao;
     private String observacoes;
     private int capacidadeDisponivel;
     private ViagemStatus viagemStatus;

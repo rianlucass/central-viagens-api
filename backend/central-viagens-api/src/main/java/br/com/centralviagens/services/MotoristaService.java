@@ -38,16 +38,6 @@ public class MotoristaService {
     @Transactional
     public MotoristaResponseDTO registerDriver(MotoristaRequestDTO motoristaRequest, UsuarioRequestDTO usuarioRequest, DadosPessoaisRequestDTO dadosPessoaisRequest, EnderecoRequestDTO enderecoRequest) {
 
-        if (motoristaRepository.existsByCnhNumero(motoristaRequest.getCnhNumero())) {
-            throw new DadoDuplicadoException("CNH já cadastrada.");
-        }
-        if (dadosPessoaisRepository.existsByCpf(dadosPessoaisRequest.getCpf())) {
-            throw new DadoDuplicadoException("CPF já cadastrado.");
-        }
-        if (dadosPessoaisRepository.existsByTelefone(dadosPessoaisRequest.getTelefone())) {
-            throw new DadoDuplicadoException("Telefone já cadastrado.");
-        }
-
         Usuario usuario = usuarioService.registerUserEntity(usuarioRequest);
         DadosPessoaisResponseDTO dadosPessoais = dadosPessoaisService.savePersonalData(dadosPessoaisRequest, usuario);
         EnderecoResponseDTO endereco = enderecoService.saveAddress(enderecoRequest, usuario);

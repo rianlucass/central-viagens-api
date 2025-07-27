@@ -1,5 +1,6 @@
 package br.com.centralviagens.dtos.request;
 
+import br.com.centralviagens.models.Passageiro;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -8,6 +9,7 @@ import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Getter
 @Setter
@@ -45,4 +47,6 @@ public class ViagemRequestDTO {
 
         @NotNull(message = "Este campo não pode ser nulo.")
         private String veiculoId;
+
+        private Passageiro passageiro;
 }
